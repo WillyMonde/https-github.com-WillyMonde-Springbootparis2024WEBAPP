@@ -17,7 +17,8 @@ public class WebappApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println(properties.getApiUrl());
+        System.out.println("Pour tester l'application web : http://localhost:9009");
+        System.out.println("Pour tester l'api " + properties.getApiUrl() + "/athletes");
     }
 
 }
