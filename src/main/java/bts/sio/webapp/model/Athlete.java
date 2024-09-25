@@ -2,6 +2,7 @@ package bts.sio.webapp.model;
 
 
 import lombok.Data;
+import java.util.List;
 
 import java.time.LocalDate;
 
@@ -14,9 +15,6 @@ public class Athlete {
     private LocalDate datenaiss ;
     private Sport sport;
     private Pays pays;
-
-
-
-
+    private List<Olympiade> olympiades;
 
 }

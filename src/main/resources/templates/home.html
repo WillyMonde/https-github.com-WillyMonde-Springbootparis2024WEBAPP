@@ -49,6 +49,7 @@
 						<th>Date de naissance</th>
 						<th>Pays</th>
 						<th>Sport</th>
+						<th>Olympiades</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -63,6 +64,12 @@
 						<td><span th:text="${#temporals.format(athlete.datenaiss, 'dd-MM-yyyy HH:mm')}"> Nom </span></td>
 						<td><span th:text="${athlete.pays.nom}"> Nom </span></td>
 						<td><span th:text="${athlete.sport.nom}"> Nom </span></td>
+						<td>
+							<ul>
+								<!-- Boucle pour afficher les olympiades -->
+								<li th:each="olympiade : ${athlete.olympiades}" th:text="${olympiade.numero} + ' - ' + ${olympiade.annee} + ' - ' + ${olympiade.ville}"></li>
+							</ul>
+						</td>
 						<td>
 							<a th:href="@{/updateAthlete/{id}(id=${athlete.id})}"><button class="btn btn-info">Modifier</button></a>
 							<a th:href="@{/deleteAthlete/{id}(id=${athlete.id})}"><button class="btn btn-danger">Supprimer</button></a>
