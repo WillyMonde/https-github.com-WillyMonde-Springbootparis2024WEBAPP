@@ -25,7 +25,7 @@ public class SportProxy {
     public Iterable<Sport> getLesSports() {
 
         String baseApiUrl = props.getApiUrl();
-        String getSportUrl = baseApiUrl + "/sport";
+        String getSportUrl = baseApiUrl + "/sports";
         System.out.println("url=" + getSportUrl);
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Iterable<Sport>> response = restTemplate.exchange(

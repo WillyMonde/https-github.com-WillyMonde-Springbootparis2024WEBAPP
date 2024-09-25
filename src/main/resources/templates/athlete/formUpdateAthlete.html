@@ -1,74 +1,99 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhml"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
+	<link rel="stylesheet"
+		  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+		  crossorigin="anonymous">
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
+	<link rel="stylesheet"
+		  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+		  integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+		  crossorigin="anonymous">
 
-<title>Paris 2024</title>
+	<title>Paris 2024</title>
 
-<style>
-body {
-	padding-top: 50px;
-}
+	<style>
+		body {
+			padding-top: 50px;
+		}
 
-.special {
-	padding-top: 50px;
-}
-</style>
+		.special {
+			padding-top: 50px;
+		}
+	</style>
 </head>
 <body>
 
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="..">Système de gestion des
-					athlètes</a>
-			</div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="..">Système de gestion des athlètes</a>
 		</div>
-	</nav>
-
-
-	<div class="container special">
-
-		<h2 class="h2">Modification d'un athlète</h2>
-		<div>
-			<form method="post"
-				th:action="@{/saveAthlete}" th:object="${athlete}">
-				<div class="form-group">
-					<input
-						type="hidden" th:field="*{id}" class="form-control">
-				</div>
-				<div class="form-group">
-					<label for="prenomInput">Prénom</label>
-					<input
-						type="text" th:field="*{prenom}" class="form-control" id="prenomInputInput"
-						aria-describedby="prenomInputHelp" placeholder="Saisir le prénom"> <small
-						id="prenomInputHelp" class="form-text text-muted">Merci d'écrire le prénom de l'athlète.</small>
-				</div>
-
-
-				<button type="submit" class="btn btn-primary">Modifier</button>
-			</form>
-		</div>
-
 	</div>
+</nav>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+<div class="container special">
+	<h2 class="h2">Modification d'un athlète</h2>
+	<div>
+		<form method="post" th:action="@{/saveAthlete}" th:object="${athlete}">
+			<input type="hidden" th:field="*{id}" class="form-control">
+
+			<!-- Champ pour le prénom -->
+			<div class="form-group">
+				<label for="prenomInput">Prénom</label>
+				<input type="text" th:field="*{prenom}" class="form-control" id="prenomInput"
+					   aria-describedby="prenomHelp" placeholder="Saisir le prénom">
+				<small id="prenomHelp" class="form-text text-muted">Merci d'écrire le prénom de l'athlète.</small>
+			</div>
+
+			<!-- Champ pour le nom -->
+			<div class="form-group">
+				<label for="nomInput">Nom</label>
+				<input type="text" th:field="*{nom}" class="form-control" id="nomInput"
+					   aria-describedby="nomHelp" placeholder="Saisir le nom">
+				<small id="nomHelp" class="form-text text-muted">Merci d'écrire le nom de l'athlète.</small>
+			</div>
+
+			<!-- Champ pour la date de naissance -->
+			<div class="form-group">
+				<label for="dateNaissInput">Date de naissance</label>
+				<input type="date" th:field="*{datenaiss}" class="form-control" id="dateNaissInput"
+					   aria-describedby="dateNaissHelp">
+				<small id="dateNaissHelp" class="form-text text-muted">Merci de sélectionner la date de naissance de l'athlète.</small>
+			</div>
+
+			<!-- Champ pour le pays -->
+			<div class="form-group">
+				<label for="paysInput">Pays</label>
+				<select th:field="*{pays.id}" class="form-control" id="paysInput">
+					<option th:each="pays : ${paysList}" th:value="${pays.id}" th:text="${pays.nom}"
+							th:selected="${pays.id == athlete.pays?.id}">Sélectionner un pays</option>
+				</select>
+				<small id="paysHelp" class="form-text text-muted">Merci de sélectionner le pays de l'athlète.</small>
+			</div>
+
+			<!-- Champ pour le sport -->
+			<div class="form-group">
+				<label for="sportInput">Sport</label>
+				<select th:field="*{sport.id}" class="form-control" id="sportInput">
+					<option th:each="sport : ${sportList}" th:value="${sport.id}" th:text="${sport.nom}"
+							th:selected="${sport.id == athlete.sport?.id}">Sélectionner un sport</option>
+				</select>
+				<small id="sportHelp" class="form-text text-muted">Merci de sélectionner le sport de l'athlète.</small>
+			</div>
+
+			<button type="submit" class="btn btn-primary">Modifier</button>
+		</form>
+	</div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 		crossorigin="anonymous"></script>
 </body>

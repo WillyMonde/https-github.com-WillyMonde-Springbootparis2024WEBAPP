@@ -13,7 +13,6 @@ public class SportService {
 
     @Autowired
     private SportProxy sportProxy;
-    public Iterable<Sport> getLesSports() {
-        return sportProxy.getLesSports();
+    public Iterable<Sport> getLesSports() {return sportProxy.getLesSports();
+        }
     }
-}
