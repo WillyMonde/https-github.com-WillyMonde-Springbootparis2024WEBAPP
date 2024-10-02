@@ -7,4 +7,5 @@ public class Sport {
         private Integer id;
         private String nom;
         private String description;
+        private Site site;
 }
